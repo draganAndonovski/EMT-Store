@@ -27,11 +27,11 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 
-        <axon.version>2.4.3</axon.version>
+        <axon.version>2.4.5</axon.version>
         <slf4j.version>1.7.5</slf4j.version>
         <log4j.version>1.2.17</log4j.version>
 
-        <spring.version>4.0.6.RELEASE</spring.version>
+        <spring.version>4.1.6.RELEASE</spring.version>
         <spring.security.version>3.2.5.RELEASE</spring.security.version>
 
         <!-- TODO check these for updates -->
@@ -46,10 +46,12 @@
 
         <!-- data store libraries -->
         <mongodb.java.version>2.12.4</mongodb.java.version>
-        <springdata.mongodb.version>1.5.2.RELEASE</springdata.mongodb.version>
+        <springdata.mongodb.version>1.6.0.RELEASE</springdata.mongodb.version>
         <springdata.jpa.version>1.6.2.RELEASE</springdata.jpa.version>
         <hibernate.em.version>4.3.6.Final</hibernate.em.version>
         <hibernate.javax.version>1.0.0.Final</hibernate.javax.version>
+        <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
+        <quartz.scheduler.version>2.2.1</quartz.scheduler.version>
 
         <!-- Test libraries-->
         <junit.version>4.11</junit.version>
@@ -140,12 +142,12 @@
             <dependency>
                 <groupId>org.thymeleaf</groupId>
                 <artifactId>thymeleaf-spring4</artifactId>
-                <version>2.1.4.RELEASE</version>
+                <version>${thymeleaf.version}</version>
             </dependency>
             <dependency>
                 <groupId>org.thymeleaf</groupId>
                 <artifactId>thymeleaf</artifactId>
-                <version>2.1.4.RELEASE</version>
+                <version>${thymeleaf.version}</version>
             </dependency>
 
         </dependencies>

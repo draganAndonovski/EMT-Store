@@ -1,17 +1,18 @@
 package org.axonframework.samples.trader.query.category;
 
 import org.springframework.data.annotation.Id;
-
-import javax.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 /**
  * Created by DELL-PC on 6/13/2016.
  */
-@Entity
+@Document
 public class CategoryEntry {
+
     @Id
     @javax.persistence.Id
     private String identifier;
+
     private String categoryName;
     private boolean mainCategory;
     private String parentCategory;

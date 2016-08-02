@@ -1,34 +1,29 @@
 package org.axonframework.samples.trader.query.order;
 
 import org.axonframework.samples.trader.query.users.LineItemEntry;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Document
 public class OrderEntry {
 
-    @javax.persistence.Id
-    @GeneratedValue
-    private Long jpaId;
-
+    @Id
     private String identifier;
 
     private String shippingAddress;
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
-    private List<LineItemEntry> lineItemEntryList = new ArrayList<LineItemEntry>();
+    private List<LineItemEntry> lineItemEntryList = new ArrayList<>();
 
     @Embedded
     private OrderInfoDTOEntry orderInfoDTOEntry;
-    String userId;
+    private String userId;
     private long tradeCount;
     private long itemPrice;
     private long itemsRemaining;
     private String type;
-
-    //@ManyToOne
-    //private UserEntry userEntry;
 
     public String getIdentifier() {
         return identifier;
@@ -68,14 +63,6 @@ public class OrderEntry {
 
     void setType(String type) {
         this.type = type;
-    }
-
-    public Long getJpaId() {
-        return jpaId;
-    }
-
-    public void setJpaId(Long jpaId) {
-        this.jpaId = jpaId;
     }
 
     public String getShippingAddress() { return shippingAddress; }

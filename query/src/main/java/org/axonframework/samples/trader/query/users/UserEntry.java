@@ -4,18 +4,18 @@ import org.axonframework.samples.trader.api.users.UserAccount;
 
 import org.axonframework.samples.trader.query.order.OrderEntry;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-@Entity
+@Document
 public class
 UserEntry implements UserAccount, Serializable {
 
     @Id
-    @javax.persistence.Id
     private String identifier;
     private String firstName;
     private String lastName;
@@ -25,13 +25,10 @@ UserEntry implements UserAccount, Serializable {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
-    private List<LineItemEntry> cart = new ArrayList<LineItemEntry>();
-
-    //@OneToMany(mappedBy = "userEntry")
-    //private List<OrderEntry> orders = new ArrayList<>();
+    private List<LineItemEntry> cart = new ArrayList<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = OrderEntry.class)
-    private List<OrderEntry> orders = new ArrayList<OrderEntry>();
+    private List<OrderEntry> orders = new ArrayList<>();
 
     public String getIdentifier() {
         return identifier;

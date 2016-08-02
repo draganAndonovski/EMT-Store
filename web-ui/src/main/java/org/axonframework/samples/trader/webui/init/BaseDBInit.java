@@ -20,8 +20,8 @@ public abstract class BaseDBInit implements DBInit {
         initializeDB();
 
         UserId buyer1 = createuser("Dragan", "Andonovski", "buyer1", "draganandonovski@gmail.com", "070-333-444", "buyer1");
-        UserId buyer2 = createuser("Martin", "Andonovski", "buyer2", "martinandonovski@gmail.com", "070-333-444", "buyer3");
-        UserId buyer3 = createuser("Ivan", "Krstevski", "buyer4", "ivankrstevski@gmail.com", "070-333-444", "buyer3");
+        UserId buyer2 = createuser("Martin", "Andonovski", "buyer2", "martinandonovski@gmail.com", "070-333-444", "buyer2");
+        UserId buyer3 = createuser("Ivan", "Krstevski", "buyer3", "ivankrstevski@gmail.com", "070-333-444", "buyer3");
 
         additionalDBSteps();
     }

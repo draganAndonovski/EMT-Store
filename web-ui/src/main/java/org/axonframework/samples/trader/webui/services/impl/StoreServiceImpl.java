@@ -4,12 +4,15 @@ import org.axonframework.samples.trader.query.category.CategoryEntry;
 import org.axonframework.samples.trader.query.category.repositories.CategoryQueryRepository;
 import org.axonframework.samples.trader.query.product.ProductEntry;
 import org.axonframework.samples.trader.query.product.repositories.ProductQueryRepository;
+import org.axonframework.samples.trader.query.product.repositories.ProductSearchRepository;
 import org.axonframework.samples.trader.query.users.LineItemEntry;
 import org.axonframework.samples.trader.query.users.UserEntry;
 import org.axonframework.samples.trader.query.users.repositories.UserQueryRepository;
 import org.axonframework.samples.trader.webui.cart.CartDTO;
 import org.axonframework.samples.trader.webui.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Sort;
+import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -27,6 +30,8 @@ public class StoreServiceImpl implements StoreService {
     CategoryQueryRepository categoryRepository;
     @Autowired
     ProductQueryRepository productRepository;
+    @Autowired
+    ProductSearchRepository productSearchRepository;
 
     @Override
     public List<CategoryEntry> getMainCategories() {
@@ -56,6 +61,15 @@ public class StoreServiceImpl implements StoreService {
     @Override
     public List<ProductEntry> findProductsByCategory(String categoryId) {
         return productRepository.findByProductCategoryIdentifier(categoryId);
+    }
+
+    @Override
+    public List<ProductEntry> searchProducts(String queryString) {
+        Sort sort = new Sort("score");
+        String[] queryWords = queryString.split(" ");
+        TextCriteria criteria = new TextCriteria().matchingAny(queryWords);
+        List<ProductEntry> productEntryList = productSearchRepository.findAllBy(criteria, sort);
+        return productEntryList;
     }
 
     @Override

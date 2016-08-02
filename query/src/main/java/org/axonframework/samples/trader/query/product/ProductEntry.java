@@ -1,25 +1,34 @@
 package org.axonframework.samples.trader.query.product;
 
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.TextIndexed;
+import org.springframework.data.mongodb.core.mapping.Document;
+import org.springframework.data.mongodb.core.mapping.TextScore;
 
-import javax.persistence.Entity;
 import javax.persistence.Lob;
 
 /**
  * Created by DELL-PC on 5/29/2016.
  */
-@Entity
+@Document
 public class ProductEntry {
 
     @Id
-    @javax.persistence.Id
     private String identifier;
+
+    @TextIndexed(weight = 5.0f)
     private String productName;
+
     private String productCategoryIdentifier;
     private float productPrice;
     private int availableQuantity;
     private boolean productAvailability;
+
+    @TextIndexed(weight = 1.0f)
     private String productDescription;
+
+    @TextScore
+    private Float score;
 
     @Lob
     private byte[] productPicture;
@@ -51,6 +60,10 @@ public class ProductEntry {
     public String getProductDescription() { return productDescription; }
 
     public void setProductDescription(String productDescription) { this.productDescription = productDescription; }
+
+    public Float getScore() { return score; }
+
+    public void setScore(Float score) { this.score = score; }
 
     public byte[] getProductPicture() { return productPicture; }
 

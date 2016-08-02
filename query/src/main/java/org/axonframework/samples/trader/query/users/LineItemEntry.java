@@ -1,6 +1,7 @@
 package org.axonframework.samples.trader.query.users;
 
-import javax.persistence.Entity;
+import org.springframework.data.mongodb.core.mapping.Document;
+
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -8,12 +9,12 @@ import javax.persistence.Id;
 /**
  * Created by DELL-PC on 5/29/2016.
  */
-@Entity
+@Document
 public class LineItemEntry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer jpaId;
+    private String identifier;
 
     private String productId;
     private int productQuantity;

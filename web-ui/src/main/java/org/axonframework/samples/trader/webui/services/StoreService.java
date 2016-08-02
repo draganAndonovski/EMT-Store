@@ -25,6 +25,8 @@ public interface StoreService {
 
     List<ProductEntry> findProductsByCategory(String categoryId);
 
+    List<ProductEntry> searchProducts(String queryString);
+
     List<CartDTO> createCartDTO(String userId);
 
     int getTotalPriceOfLineItems(String userId);
