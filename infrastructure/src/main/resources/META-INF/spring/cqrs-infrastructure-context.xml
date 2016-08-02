@@ -56,16 +56,6 @@
 
     <bean id="cacheManager" class="org.springframework.cache.ehcache.EhCacheManagerFactoryBean"/>
 
-    <beans profile="hsqldb">
-
-        <axon:jdbc-event-store id="eventStore" data-source="dataSource" sql-schema="eventSqlSchema"/>
-
-        <axon:jdbc-saga-repository id="sagaRepository" data-source="dataSource" sql-schema="sagaSqlSchema"/>
-
-        <bean id="eventSqlSchema" class="org.axonframework.eventstore.jdbc.GenericEventSqlSchema"/>
-        <bean id="sagaSqlSchema" class="org.axonframework.saga.repository.jdbc.HsqlSagaSqlSchema"/>
-    </beans>
-
     <beans profile="mongodb">
         <bean id="eventStore" class="org.axonframework.eventstore.mongo.MongoEventStore">
             <constructor-arg ref="mongoTemplate"/>
@@ -79,6 +69,5 @@
         </bean>
 
     </beans>
-
 
 </beans>

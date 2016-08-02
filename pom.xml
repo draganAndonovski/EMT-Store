@@ -274,7 +274,6 @@
                                     <excludes>
                                         <exclude>javassist:javassist</exclude>
                                         <exclude>commons-logging</exclude>
-                                        <exclude>hsqldb:hsqldb</exclude>
                                         <exclude>org.slf4j:1.5*</exclude>
                                         <exclude>org.springframework:2.*</exclude>
                                         <exclude>org.springframework:3.0.*</exclude>
