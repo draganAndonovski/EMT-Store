@@ -8,7 +8,7 @@ import org.axonframework.samples.trader.api.orders.ConfirmPaymentCommand;
 import org.axonframework.samples.trader.api.orders.LineItem;
 import org.axonframework.samples.trader.api.orders.OrderInfoDTO;
 import org.axonframework.samples.trader.api.orders.PlaceOrderCommand;
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
+import org.axonframework.samples.trader.api.orders.OrderId;
 import org.axonframework.samples.trader.api.product.CreateProductCommand;
 import org.axonframework.samples.trader.api.product.ProductId;
 import org.axonframework.samples.trader.api.users.*;
@@ -16,7 +16,6 @@ import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

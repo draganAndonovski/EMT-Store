@@ -71,9 +71,7 @@
         <module>orders</module>
         <module>trade-engine</module>
         <module>users</module>
-        <module>companies</module>
         <module>web-ui</module>
-        <module>external-listeners</module>
         <module>products</module>
         <module>categories</module>
     </modules>

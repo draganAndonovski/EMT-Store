@@ -5,7 +5,6 @@ import org.axonframework.eventsourcing.annotation.AbstractAnnotatedAggregateRoot
 import org.axonframework.eventsourcing.annotation.AggregateIdentifier;
 import org.axonframework.samples.trader.api.category.CategoryCreatedEvent;
 import org.axonframework.samples.trader.api.category.CategoryId;
-import org.axonframework.samples.trader.api.category.CreateCategoryCommand;
 
 /**
  * Created by DELL-PC on 6/13/2016.

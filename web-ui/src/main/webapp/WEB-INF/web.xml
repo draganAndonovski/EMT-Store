@@ -25,18 +25,16 @@
     <context-param>
         <param-name>contextConfigLocation</param-name>
         <param-value>
+            classpath:META-INF.spring/categories-context.xml,
+            classpath:META-INF/spring/configuration-context.xml,
             classpath:META-INF/spring/cqrs-infrastructure-context.xml,
             classpath:META-INF/spring/persistence-infrastructure-context.xml,
-            classpath:META-INF/spring/query-context.xml,
             classpath:META-INF/spring/orders-context.xml,
+            classpath:META-INF.spring/products-context.xml,
+            classpath:META-INF/spring/query-context.xml,
             classpath:META-INF/spring/trade-engine-context.xml,
             classpath:META-INF/spring/users-context.xml,
-            classpath:META-INF/spring/companies-context.xml,
-            classpath:META-INF/spring/configuration-context.xml,
             classpath:META-INF/spring/security-context.xml,
-            classpath:META-INF/spring/external-context.xml,
-            classpath:META-INF.spring/products-context.xml,
-            classpath:META-INF.spring/categories-context.xml
         </param-value>
     </context-param>
 
@@ -89,7 +87,7 @@
         <!--<url-pattern>/company/*</url-pattern>-->
         <!--<url-pattern>/product/*</url-pattern>-->
         <!--<url-pattern>/category/*</url-pattern>-->
-        <!--<url-pattern>/orderbook/*</url-pattern>-->
+        <!--<url-pattern>/order/*</url-pattern>-->
         <!--<url-pattern>/spring_security_login</url-pattern>-->
         <!--<url-pattern>/j_spring_security_check</url-pattern>-->
         <!--<url-pattern>/j_spring_security_logout</url-pattern>-->

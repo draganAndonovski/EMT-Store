@@ -27,8 +27,6 @@ public interface DBInit {
 
     void createItems();
 
-    void depositMoneyToPortfolio(String portfolioIdentifier, long amountOfMoney);
-
     Set<String> obtainCollectionNames();
 
     DataResults obtainCollection(String collectionName, int numItems, int start);

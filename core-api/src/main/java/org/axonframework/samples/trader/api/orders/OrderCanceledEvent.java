@@ -1,10 +1,5 @@
 package org.axonframework.samples.trader.api.orders;
 
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
-import org.axonframework.samples.trader.api.users.UserId;
-
-import java.util.List;
-
 /**
  * Created by DELL-PC on 7/3/2016.
  */

@@ -2,7 +2,6 @@ package org.axonframework.samples.trader.query.product.repositories;
 
 import org.axonframework.samples.trader.query.product.ProductEntry;
 import org.springframework.data.repository.PagingAndSortingRepository;
-import org.springframework.stereotype.Component;
 
 import java.util.List;
 

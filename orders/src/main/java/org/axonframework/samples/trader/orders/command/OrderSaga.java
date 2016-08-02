@@ -1,26 +1,19 @@
 package org.axonframework.samples.trader.orders.command;
 
-import javafx.application.Application;
-import jdk.nashorn.internal.objects.annotations.Setter;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.GenericCommandMessage;
 import org.axonframework.eventhandling.scheduling.EventScheduler;
 import org.axonframework.eventhandling.scheduling.ScheduleToken;
-import org.axonframework.eventhandling.scheduling.quartz.QuartzEventScheduler;
-import org.axonframework.saga.Saga;
 import org.axonframework.saga.annotation.AbstractAnnotatedSaga;
-import org.axonframework.saga.annotation.EndSaga;
 import org.axonframework.saga.annotation.SagaEventHandler;
 import org.axonframework.saga.annotation.StartSaga;
 import org.axonframework.samples.trader.api.orders.*;
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
+import org.axonframework.samples.trader.api.orders.OrderId;
 import org.axonframework.samples.trader.api.product.*;
 import org.axonframework.samples.trader.api.users.UserId;
 import org.joda.time.DateTime;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationContext;
 
-import java.util.ArrayList;
 import java.util.List;
 
 /**

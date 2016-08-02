@@ -2,7 +2,7 @@ package org.axonframework.samples.trader.webui.order;
 
 import org.axonframework.samples.trader.api.orders.LineItem;
 import org.axonframework.samples.trader.api.orders.OrderInfoDTO;
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
+import org.axonframework.samples.trader.api.orders.OrderId;
 import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.axonframework.samples.trader.webui.services.StoreService;
 import org.axonframework.samples.trader.webui.util.GeneralUtil;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
-import java.util.ArrayList;
 import java.util.List;
 
 /**

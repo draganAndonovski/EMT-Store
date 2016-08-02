@@ -1,8 +1,5 @@
 package org.axonframework.samples.trader.api.category;
 
-import org.axonframework.samples.trader.api.product.ProductId;
-
-
 /**
  * Created by DELL-PC on 5/23/2016.
  */

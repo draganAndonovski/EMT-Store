@@ -1,5 +1,5 @@
 package org.axonframework.samples.trader.webui.util;
-	/*==================================================================
+    /*==================================================================
 	 PayPal Express Checkout Call
 	 ===================================================================
 	*/
@@ -13,25 +13,25 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.*;
 import javax.servlet.http.*;
 
-    @WebServlet("/expresscheckout")
-    public class expresscheckout  extends HttpServlet {
+@WebServlet("/expresscheckout")
+public class expresscheckout extends HttpServlet {
 
-        public void doGet(HttpServletRequest request,
-                          HttpServletResponse response)
+    public void doGet(HttpServletRequest request,
+                      HttpServletResponse response)
             throws ServletException, IOException {
 
-            // Use "request" to read incoming HTTP headers (e.g. cookies)
-            // and HTML form data (e.g. data the user entered and submitted)
+        // Use "request" to read incoming HTTP headers (e.g. cookies)
+        // and HTML form data (e.g. data the user entered and submitted)
 
-            // Use "response" to specify the HTTP response line and headers
-            // (e.g. specifying the content type, setting cookies).
+        // Use "response" to specify the HTTP response line and headers
+        // (e.g. specifying the content type, setting cookies).
 
-            ///PrintWriter out = response.getWriter();
-            // Use "out" to send content to browser
-            ///  out.println("Hello World");
+        ///PrintWriter out = response.getWriter();
+        // Use "out" to send content to browser
+        ///  out.println("Hello World");
 
 
-            HttpSession session = request.getSession(true);
+        HttpSession session = request.getSession(true);
 
             /*
             '-------------------------------------------
@@ -42,7 +42,7 @@ import javax.servlet.http.*;
             '-------------------------------------------
             */
 
-            String paymentAmount = (String) session.getAttribute("Payment_Amount");
+        String paymentAmount = (String) session.getAttribute("Payment_Amount");
 
 
             /*
@@ -54,7 +54,7 @@ import javax.servlet.http.*;
             '------------------------------------
             */
 
-            String returnURL = "http://localhost:8080/order/orderSuccess";
+        String returnURL = "http://localhost:8080/order/orderSuccess";
 
             /*
             '------------------------------------
@@ -64,7 +64,7 @@ import javax.servlet.http.*;
             ' This is set to the value entered on the Integration Assistant
             '------------------------------------
             */
-            String cancelURL = "http://localhost:8080";
+        String cancelURL = "http://localhost:8080";
             /*
             '------------------------------------
             ' Calls the SetExpressCheckout API call
@@ -73,32 +73,29 @@ import javax.servlet.http.*;
             ' it is included at the top of this file.
             '-------------------------------------------------
             */
-            paypalfunctions ppf = new paypalfunctions();
-            HashMap nvp = ppf.CallShortcutExpressCheckout (paymentAmount, returnURL, cancelURL);
-            String strAck = nvp.get("ACK").toString();
-            if(strAck !=null && strAck.equalsIgnoreCase("Success"))
-            {
-                session.setAttribute("token", nvp.get("TOKEN").toString());
-                //' Redirect to paypal.com
-                ppf.RedirectURL(response, nvp.get("TOKEN").toString());
-                //response.sendRedirect(response.encodeRedirectURL( nvp.get("TOKEN").toString() ));
-                //response.sendRedirect(response);
-            }
-            else
-            {
-                // Display a user friendly Error on the page using any of the following error information returned by PayPal
+        paypalfunctions ppf = new paypalfunctions();
+        HashMap nvp = ppf.CallShortcutExpressCheckout(paymentAmount, returnURL, cancelURL);
+        String strAck = nvp.get("ACK").toString();
+        if (strAck != null && strAck.equalsIgnoreCase("Success")) {
+            session.setAttribute("token", nvp.get("TOKEN").toString());
+            //' Redirect to paypal.com
+            ppf.RedirectURL(response, nvp.get("TOKEN").toString());
+            //response.sendRedirect(response.encodeRedirectURL( nvp.get("TOKEN").toString() ));
+            //response.sendRedirect(response);
+        } else {
+            // Display a user friendly Error on the page using any of the following error information returned by PayPal
 
-                String ErrorCode = nvp.get("L_ERRORCODE0").toString();
-                String ErrorShortMsg = nvp.get("L_SHORTMESSAGE0").toString();
-                String ErrorLongMsg = nvp.get("L_LONGMESSAGE0").toString();
-                String ErrorSeverityCode = nvp.get("L_SEVERITYCODE0").toString();
-            }
-   }
+            String ErrorCode = nvp.get("L_ERRORCODE0").toString();
+            String ErrorShortMsg = nvp.get("L_SHORTMESSAGE0").toString();
+            String ErrorLongMsg = nvp.get("L_LONGMESSAGE0").toString();
+            String ErrorSeverityCode = nvp.get("L_SEVERITYCODE0").toString();
+        }
+    }
 
     public void doPost(HttpServletRequest request,
                        HttpServletResponse response)
-        throws ServletException, IOException {
-      doGet(request, response);
+            throws ServletException, IOException {
+        doGet(request, response);
     }
 
-  }
+}

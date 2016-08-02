@@ -3,10 +3,8 @@ package org.axonframework.samples.trader.product.command;
 import org.axonframework.commandhandling.annotation.CommandHandler;
 import org.axonframework.repository.Repository;
 import org.axonframework.samples.trader.api.product.*;
-import org.axonframework.samples.trader.product.command.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
-import org.springframework.expression.ExpressionException;
 
 /**
  * Created by DELL-PC on 5/23/2016.

@@ -1,14 +1,9 @@
 package org.axonframework.samples.trader.query.product;
 
-import org.codehaus.jackson.annotate.JsonIgnore;
-import org.codehaus.jackson.annotate.JsonProperty;
-import org.hibernate.metamodel.source.annotations.attribute.type.LobTypeResolver;
 import org.springframework.data.annotation.Id;
-import org.springframework.data.annotation.Transient;
 
 import javax.persistence.Entity;
 import javax.persistence.Lob;
-import java.sql.Blob;
 
 /**
  * Created by DELL-PC on 5/29/2016.

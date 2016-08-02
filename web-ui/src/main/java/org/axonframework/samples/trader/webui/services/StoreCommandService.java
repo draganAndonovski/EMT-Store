@@ -2,7 +2,7 @@ package org.axonframework.samples.trader.webui.services;
 
 import org.axonframework.samples.trader.api.orders.LineItem;
 import org.axonframework.samples.trader.api.orders.OrderInfoDTO;
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
+import org.axonframework.samples.trader.api.orders.OrderId;
 
 import java.util.List;
 

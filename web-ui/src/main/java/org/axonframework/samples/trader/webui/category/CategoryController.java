@@ -1,10 +1,5 @@
 package org.axonframework.samples.trader.webui.category;
 
-import org.axonframework.commandhandling.CommandBus;
-import org.axonframework.commandhandling.GenericCommandMessage;
-import org.axonframework.samples.trader.api.category.CategoryId;
-import org.axonframework.samples.trader.api.category.CreateCategoryCommand;
-import org.axonframework.samples.trader.query.product.ProductEntry;
 import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.axonframework.samples.trader.webui.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;

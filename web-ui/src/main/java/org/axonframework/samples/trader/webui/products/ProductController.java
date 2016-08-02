@@ -1,11 +1,6 @@
 package org.axonframework.samples.trader.webui.products;
 
 import org.apache.commons.io.IOUtils;
-import org.axonframework.commandhandling.CommandBus;
-import org.axonframework.commandhandling.GenericCommandMessage;
-import org.axonframework.samples.trader.api.product.CreateProductCommand;
-import org.axonframework.samples.trader.api.product.ProductId;
-import org.axonframework.samples.trader.api.users.AddLineItemToCartCommand;
 import org.axonframework.samples.trader.query.product.ProductEntry;
 import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.axonframework.samples.trader.webui.services.StoreService;

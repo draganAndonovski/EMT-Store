@@ -5,18 +5,6 @@ import com.mongodb.DBObject;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.eventstore.mongo.MongoEventStore;
 import org.axonframework.saga.repository.mongo.MongoTemplate;
-import org.axonframework.samples.trader.query.category.CategoryEntry;
-import org.axonframework.samples.trader.query.company.CompanyEntry;
-import org.axonframework.samples.trader.query.company.repositories.CompanyQueryRepository;
-import org.axonframework.samples.trader.query.orderbook.OrderBookEntry;
-import org.axonframework.samples.trader.query.orderbook.OrderEntry;
-import org.axonframework.samples.trader.query.orderbook.repositories.OrderBookQueryRepository;
-import org.axonframework.samples.trader.query.portfolio.PortfolioEntry;
-import org.axonframework.samples.trader.query.portfolio.repositories.PortfolioQueryRepository;
-import org.axonframework.samples.trader.query.product.ProductEntry;
-import org.axonframework.samples.trader.query.tradeexecuted.TradeExecutedEntry;
-import org.axonframework.samples.trader.query.transaction.TransactionEntry;
-import org.axonframework.samples.trader.query.users.LineItemEntry;
 import org.axonframework.samples.trader.query.users.UserEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,9 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-/**
- *
- */
 @SuppressWarnings("SpringJavaAutowiringInspection")
 @Component
 @Profile("mongodb")
@@ -46,14 +31,12 @@ public class MongoDBInit extends BaseDBInit {
 
     @Autowired
     public MongoDBInit(CommandBus commandBus,
-                       CompanyQueryRepository companyRepository,
                        org.axonframework.eventstore.mongo.MongoTemplate systemMongo,
                        MongoEventStore eventStore,
                        org.springframework.data.mongodb.core.MongoTemplate mongoTemplate,
                        MongoTemplate systemAxonSagaMongo,
-                       PortfolioQueryRepository portfolioRepository,
-                       OrderBookQueryRepository orderBookRepository, org.springframework.data.mongodb.core.MongoTemplate springTemplate) {
-        super(commandBus, companyRepository, portfolioRepository, orderBookRepository);
+                       org.springframework.data.mongodb.core.MongoTemplate springTemplate) {
+        super(commandBus);
         this.systemAxonMongo = systemMongo;
         this.eventStore = eventStore;
         this.mongoTemplate = mongoTemplate;
@@ -105,13 +88,9 @@ public class MongoDBInit extends BaseDBInit {
         mongoTemplate.dropCollection(TradeExecutedEntry.class);
         mongoTemplate.dropCollection(PortfolioEntry.class);
         mongoTemplate.dropCollection(TransactionEntry.class);
-        */
-        /**
-         * Edit: Dragan Andonovski
-         */
-       // mongoTemplate.dropCollection(CategoryEntry.class);
-        //mongoTemplate.dropCollection(ProductEntry.class);
-        //mongoTemplate.dropCollection(LineItemEntry.class);
+        mongoTemplate.dropCollection(CategoryEntry.class);
+        mongoTemplate.dropCollection(ProductEntry.class);
+        mongoTemplate.dropCollection(LineItemEntry.class);*/
     }
 
     @Override

@@ -1,8 +1,6 @@
 package org.axonframework.samples.trader.api.orders;
 
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
 import org.axonframework.samples.trader.api.users.UserId;
-import org.springframework.core.annotation.Order;
 
 import java.util.List;
 

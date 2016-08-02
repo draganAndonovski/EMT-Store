@@ -8,13 +8,10 @@ package org.axonframework.samples.trader.webui.util;
  * To change this template use File | Settings | File Templates.
  */
 
-import java.net.URLDecoder.*;
 import java.util.*;
 import java.util.HashMap;
-import java.util.StringTokenizer.*;
 import java.io.*;
 import java.net.*;
-import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 public class paypalfunctions  {
@@ -370,4 +367,3 @@ public void RedirectURL( HttpServletResponse response, String token ) throws IOE
 
 //end class
 }
-

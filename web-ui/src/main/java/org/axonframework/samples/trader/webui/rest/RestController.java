@@ -20,10 +20,6 @@ import com.thoughtworks.xstream.XStream;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.commandhandling.GenericCommandMessage;
 import org.axonframework.commandhandling.StructuralCommandValidationFailedException;
-import org.axonframework.samples.trader.query.orderbook.OrderBookEntry;
-import org.axonframework.samples.trader.query.orderbook.repositories.OrderBookQueryRepository;
-import org.axonframework.samples.trader.query.portfolio.PortfolioEntry;
-import org.axonframework.samples.trader.query.portfolio.repositories.PortfolioQueryRepository;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,8 +30,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 import javax.servlet.http.HttpServletResponse;
 
 /**
@@ -50,17 +44,12 @@ public class RestController {
 
     private static final Logger logger = LoggerFactory.getLogger(RestController.class);
     private CommandBus commandBus;
-    private PortfolioQueryRepository portfolioQueryRepository;
-    private OrderBookQueryRepository orderBookQueryRepository;
 
     private XStream xStream;
 
     @SuppressWarnings("SpringJavaAutowiringInspection")
     @Autowired
-    public RestController(CommandBus commandBus, PortfolioQueryRepository portfolioQueryRepository,
-                          OrderBookQueryRepository orderBookQueryRepository) {
-        this.portfolioQueryRepository = portfolioQueryRepository;
-        this.orderBookQueryRepository = orderBookQueryRepository;
+    public RestController(CommandBus commandBus) {
         this.xStream = new XStream();
         this.commandBus = commandBus;
     }
@@ -86,34 +75,21 @@ public class RestController {
     public
     @ResponseBody
     String obtainPortfolios() {
-        Iterable<PortfolioEntry> all = portfolioQueryRepository.findAll();
-        List<PortfolioEntry> portfolioEntries = new ArrayList<PortfolioEntry>();
-        for (PortfolioEntry entry : all) {
-            portfolioEntries.add(entry);
-        }
 
-        return xStream.toXML(portfolioEntries);
+        return xStream.toXML("");
     }
 
     @RequestMapping("/portfolio/{identifier}")
     public
     @ResponseBody
     String obtainPortfolio(@PathVariable String identifier) {
-        PortfolioEntry entry = portfolioQueryRepository.findOne(identifier);
-
-        return xStream.toXML(entry);
+        return xStream.toXML("");
     }
 
-    @RequestMapping("/orderbook")
+    @RequestMapping("/order")
     public
     @ResponseBody
     String obtainOrderBooks() {
-        Iterable<OrderBookEntry> all = orderBookQueryRepository.findAll();
-        List<OrderBookEntry> orderBookEntries = new ArrayList<OrderBookEntry>();
-        for (OrderBookEntry entry : all) {
-            orderBookEntries.add(entry);
-        }
-
-        return xStream.toXML(orderBookEntries);
+        return xStream.toXML("");
     }
 }

@@ -2,8 +2,6 @@ package org.axonframework.samples.trader.api.product;
 
 import org.axonframework.samples.trader.api.category.CategoryId;
 
-import java.sql.Blob;
-
 /**
  * Created by DELL-PC on 5/23/2016.
  */

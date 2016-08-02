@@ -1,9 +1,12 @@
-package org.axonframework.samples.trader.api.orders;
+package org.axonframework.samples.trader.query.order;
+
+import javax.persistence.Embeddable;
 
 /**
  * Created by DELL-PC on 7/4/2016.
  */
-public class OrderInfoDTO {
+@Embeddable
+public class OrderInfoDTOEntry {
 
     private String email;
     private String payerId;

@@ -1,7 +1,5 @@
 package org.axonframework.samples.trader.api.orders;
 
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
-
 /**
  * Created by DELL-PC on 7/4/2016.
  */

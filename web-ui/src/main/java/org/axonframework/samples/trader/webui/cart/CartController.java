@@ -1,11 +1,5 @@
 package org.axonframework.samples.trader.webui.cart;
 
-import org.axonframework.commandhandling.CommandBus;
-import org.axonframework.commandhandling.GenericCommandMessage;
-import org.axonframework.samples.trader.api.orders.PlaceOrderCommand;
-import org.axonframework.samples.trader.api.orders.trades.OrderId;
-import org.axonframework.samples.trader.api.users.RemoveLineItemFromCartCommand;
-import org.axonframework.samples.trader.api.users.UserId;
 import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.axonframework.samples.trader.webui.services.StoreService;
 import org.axonframework.samples.trader.webui.util.SecurityUtil;

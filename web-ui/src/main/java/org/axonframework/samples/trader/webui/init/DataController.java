@@ -74,7 +74,6 @@ public class DataController {
     public String addMoneyToPortfolio(@PathVariable("identifier") String portfolioIdentifier,
                                       @PathVariable("amount") long amount,
                                       Model model) {
-        dbInit.depositMoneyToPortfolio(portfolioIdentifier, amount);
         model.addAttribute("info", "Added cash to the portfolio.");
         return "data/info";
     }

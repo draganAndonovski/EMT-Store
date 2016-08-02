@@ -1,6 +1,5 @@
 package org.axonframework.samples.trader.webui.home;
 
-import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.samples.trader.webui.services.StoreService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,7 +16,6 @@ public class HomePageController {
 
     @Autowired
     StoreService storeService;
-
 
     @RequestMapping(method = RequestMethod.GET)
     public String get(Model model) { return "home/index"; }
