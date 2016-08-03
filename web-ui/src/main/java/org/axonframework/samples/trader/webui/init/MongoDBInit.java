@@ -1,11 +1,11 @@
 package org.axonframework.samples.trader.webui.init;
 
+import com.mongodb.BasicDBObject;
 import com.mongodb.DBCursor;
 import com.mongodb.DBObject;
 import org.axonframework.commandhandling.CommandBus;
 import org.axonframework.eventstore.mongo.MongoEventStore;
 import org.axonframework.saga.repository.mongo.MongoTemplate;
-import org.axonframework.samples.trader.query.users.UserEntry;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -66,11 +66,14 @@ public class MongoDBInit extends BaseDBInit {
 
     @Override
     public void createItemsIfNoUsersExist() {
-        if (!mongoTemplate.collectionExists(UserEntry.class)) {
+        if (mongoTemplate.getCollection("userEntry").count() == 0) {
+
+            mongoTemplate.getCollection("userEntry").createIndex(new BasicDBObject("username", 1),
+                    new BasicDBObject("unique", true));
+
             createItems();
             logger.info("The database has been created and refreshed with some data.");
         }
-
     }
 
     @Override

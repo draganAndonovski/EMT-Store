@@ -16,9 +16,11 @@
 
 package org.axonframework.samples.trader.webui.security;
 
+import org.axonframework.samples.trader.query.order.OrderEntry;
 import org.axonframework.samples.trader.query.users.repositories.UserQueryRepository;
 import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.axonframework.samples.trader.webui.services.StoreService;
+import org.axonframework.samples.trader.webui.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -26,6 +28,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+
+import java.util.List;
 
 /**
  * @author Jettro Coenradie
@@ -66,7 +70,8 @@ public class UserController {
                              @RequestParam("password_confirmation")String passwordConfirm) {
 
 
-        storeCommandService.createUser(firstName, lastName, userName, email, phone, password);
+        if(!storeService.userNameExists(userName))
+            storeCommandService.createUser(firstName, lastName, userName, email, phone, password);
         return "redirect:/";
     }
 
@@ -74,5 +79,14 @@ public class UserController {
     public String detail(@PathVariable("identifier") String userIdentifier, Model model) {
         model.addAttribute("item", userRepository.findByIdentifier(userIdentifier));
         return "user/detail";
+    }
+
+    @RequestMapping(value = "/orders", method = RequestMethod.GET)
+    public String orders(Model model) {
+
+        String userId = SecurityUtil.obtainLoggedinUserIdentifier();
+        List<OrderEntry> orderEntryList = storeService.getOrdersForUser(userId);
+        model.addAttribute("orders", orderEntryList);
+        return "user/orders";
     }
 }

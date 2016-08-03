@@ -2,6 +2,7 @@ package org.axonframework.samples.trader.webui.services.impl;
 
 import org.axonframework.samples.trader.query.category.CategoryEntry;
 import org.axonframework.samples.trader.query.category.repositories.CategoryQueryRepository;
+import org.axonframework.samples.trader.query.order.OrderEntry;
 import org.axonframework.samples.trader.query.product.ProductEntry;
 import org.axonframework.samples.trader.query.product.repositories.ProductQueryRepository;
 import org.axonframework.samples.trader.query.product.repositories.ProductSearchRepository;
@@ -32,6 +33,9 @@ public class StoreServiceImpl implements StoreService {
     ProductQueryRepository productRepository;
     @Autowired
     ProductSearchRepository productSearchRepository;
+
+    @Override
+    public boolean userNameExists(String userName) { return !(userRepository.findByUsername(userName) == null); }
 
     @Override
     public List<CategoryEntry> getMainCategories() {
@@ -70,6 +74,11 @@ public class StoreServiceImpl implements StoreService {
         TextCriteria criteria = new TextCriteria().matchingAny(queryWords);
         List<ProductEntry> productEntryList = productSearchRepository.findAllBy(criteria, sort);
         return productEntryList;
+    }
+
+    @Override
+    public List<OrderEntry> getOrdersForUser(String userId) {
+        return userRepository.findByIdentifier(userId).getOrders();
     }
 
     @Override

@@ -30,7 +30,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.GrantedAuthorityImpl;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Component;
 
 import java.util.Collection;
@@ -51,10 +51,13 @@ import java.util.concurrent.ExecutionException;
 public class TraderAuthenticationProvider implements AuthenticationProvider {
 
     private final static Collection<GrantedAuthority> userAuthorities;
+    private final static Collection<GrantedAuthority> adminAuthorities;
 
     static {
-        userAuthorities = new HashSet<GrantedAuthority>();
-        userAuthorities.add(new GrantedAuthorityImpl("ROLE_USER"));
+        userAuthorities = new HashSet<>();
+        userAuthorities.add(new SimpleGrantedAuthority("ROLE_USER"));
+        adminAuthorities = new HashSet<>();
+        adminAuthorities.add(new SimpleGrantedAuthority("ROLE_ADMIN"));
     }
 
     @Autowired
@@ -68,10 +71,10 @@ public class TraderAuthenticationProvider implements AuthenticationProvider {
         UsernamePasswordAuthenticationToken token = (UsernamePasswordAuthenticationToken) authentication;
         String username = token.getName();
         String password = String.valueOf(token.getCredentials());
-        FutureCallback<UserAccount> accountCallback = new FutureCallback<UserAccount>();
+        FutureCallback<UserAccount> accountCallback = new FutureCallback<>();
         AuthenticateUserCommand command = new AuthenticateUserCommand(username, password.toCharArray());
         try {
-            commandBus.dispatch(new GenericCommandMessage<AuthenticateUserCommand>(command), accountCallback);
+            commandBus.dispatch(new GenericCommandMessage<>(command), accountCallback);
             // the bean validating interceptor is defined as a dispatch interceptor, meaning it is executed before
             // the command is dispatched.
         } catch (StructuralCommandValidationFailedException e) {
@@ -89,8 +92,10 @@ public class TraderAuthenticationProvider implements AuthenticationProvider {
             throw new AuthenticationServiceException("Credentials could not be verified", e);
         }
 
+        Collection<GrantedAuthority> authorities = userAuthorities;
+        if(account.getUserName().equals("admin")) authorities = adminAuthorities;
         UsernamePasswordAuthenticationToken result =
-                new UsernamePasswordAuthenticationToken(account, authentication.getCredentials(), userAuthorities);
+                new UsernamePasswordAuthenticationToken(account, authentication.getCredentials(), authorities);
         result.setDetails(authentication.getDetails());
         return result;
     }

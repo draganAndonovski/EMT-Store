@@ -12,6 +12,7 @@ public class OrderEntry {
 
     @Id
     private String identifier;
+    private String userId;
 
     private String shippingAddress;
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
@@ -19,11 +20,6 @@ public class OrderEntry {
 
     @Embedded
     private OrderInfoDTOEntry orderInfoDTOEntry;
-    private String userId;
-    private long tradeCount;
-    private long itemPrice;
-    private long itemsRemaining;
-    private String type;
 
     public String getIdentifier() {
         return identifier;
@@ -31,38 +27,6 @@ public class OrderEntry {
 
     void setIdentifier(String identifier) {
         this.identifier = identifier;
-    }
-
-    public long getItemPrice() {
-        return itemPrice;
-    }
-
-    void setItemPrice(long itemPrice) {
-        this.itemPrice = itemPrice;
-    }
-
-    public long getItemsRemaining() {
-        return itemsRemaining;
-    }
-
-    void setItemsRemaining(long itemsRemaining) {
-        this.itemsRemaining = itemsRemaining;
-    }
-
-    public long getTradeCount() {
-        return tradeCount;
-    }
-
-    void setTradeCount(long tradeCount) {
-        this.tradeCount = tradeCount;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    void setType(String type) {
-        this.type = type;
     }
 
     public String getShippingAddress() { return shippingAddress; }
