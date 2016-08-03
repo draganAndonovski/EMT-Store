@@ -60,4 +60,22 @@ public class CartController {
         storeCommandService.updateLineItemQuantity(userId, productId, quantity);
         return "redirect:/cart/view";
     }
+
+    @RequestMapping(value = "/wishList", method = RequestMethod.GET)
+    public String viewWishList(Model model, HttpSession session) {
+
+        String userId = SecurityUtil.obtainLoggedinUserIdentifier();
+        model.addAttribute("products", storeService.getUserWishList(userId));
+
+        return "cart/wishList";
+    }
+
+    @RequestMapping(value = "/removeProductFromWishList/{productId}", method = RequestMethod.POST)
+    public String removeFromWishList(@PathVariable String productId, Model model) {
+
+        String userId = SecurityUtil.obtainLoggedinUserIdentifier();
+        storeCommandService.removeProductFromWishList(userId, productId);
+
+        return "cart/wishList";
+    }
 }

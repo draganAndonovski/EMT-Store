@@ -17,6 +17,10 @@ public interface StoreCommandService {
 
     void removeProductFromCart(String userId, String productId);
 
+    void addProductToWishList(String userId, String productId);
+
+    void removeProductFromWishList(String userId, String productId);
+
     void createCategory(String categoryName, boolean mainCategory, String parentCategory);
 
     void createUser(String firstName, String lastName, String userName, String email, String phone, String password);

@@ -46,6 +46,18 @@ public class StoreCommandServiceImpl implements StoreCommandService {
     }
 
     @Override
+    public void addProductToWishList(String userId, String productId) {
+        AddProductToWishListCommand command = new AddProductToWishListCommand(userId, productId);
+        commandBus.dispatch(new GenericCommandMessage<Object>(command));
+    }
+
+    @Override
+    public void removeProductFromWishList(String userId, String productId) {
+        RemoveProductFromWishListCommand command = new RemoveProductFromWishListCommand(userId, productId);
+        commandBus.dispatch(new GenericCommandMessage<Object>(command));
+    }
+
+    @Override
     public void createCategory(String categoryName, boolean mainCategory, String parentCategory) {
         CreateCategoryCommand command = new CreateCategoryCommand(new CategoryId(), categoryName, mainCategory, parentCategory);
         commandBus.dispatch(new GenericCommandMessage<Object>(command));

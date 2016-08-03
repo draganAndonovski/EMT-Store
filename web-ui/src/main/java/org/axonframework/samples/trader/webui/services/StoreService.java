@@ -8,6 +8,7 @@ import org.axonframework.samples.trader.query.users.UserEntry;
 import org.axonframework.samples.trader.webui.cart.CartDTO;
 
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by DELL-PC on 6/18/2016.
@@ -22,7 +23,9 @@ public interface StoreService {
 
     UserEntry findUser(String userId);
 
-    List<LineItemEntry> getUserCart(String userId);
+    Set<LineItemEntry> getUserCart(String userId);
+
+    Set<ProductEntry> getUserWishList(String userId);
 
     ProductEntry findProduct(String productId);
 

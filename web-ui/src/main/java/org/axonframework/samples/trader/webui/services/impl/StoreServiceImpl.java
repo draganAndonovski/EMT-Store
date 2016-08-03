@@ -17,7 +17,9 @@ import org.springframework.data.mongodb.core.query.TextCriteria;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 /**
  * Created by DELL-PC on 6/18/2016.
@@ -53,8 +55,18 @@ public class StoreServiceImpl implements StoreService {
     }
 
     @Override
-    public List<LineItemEntry> getUserCart(String userId) {
-        return userRepository.findOne(userId).getCart();
+    public Set<LineItemEntry> getUserCart(String userId) { return userRepository.findOne(userId).getCart(); }
+
+    @Override
+    public Set<ProductEntry> getUserWishList(String userId) {
+        Set<ProductEntry> wishList = new HashSet<>();
+
+        Set<String> userWishList = userRepository.findOne(userId).getWishList();
+        for(String productId : userWishList) {
+            ProductEntry productEntry = productRepository.findOne(productId);
+            wishList.add(productEntry);
+        }
+        return wishList;
     }
 
     @Override
@@ -83,7 +95,7 @@ public class StoreServiceImpl implements StoreService {
 
     @Override
     public List<CartDTO> createCartDTO(String userId) {
-        List<LineItemEntry> cartLineItems = this.getUserCart(userId);
+        Set<LineItemEntry> cartLineItems = this.getUserCart(userId);
 
         List<CartDTO> productsInCart = new ArrayList<>();
         for (LineItemEntry lineItemEntry : cartLineItems) {

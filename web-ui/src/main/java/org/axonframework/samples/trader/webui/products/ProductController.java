@@ -87,4 +87,12 @@ public class ProductController {
         return "redirect:/product/" +productId;
     }
 
+    @RequestMapping(value = "/addToWishList/{productId}", method = RequestMethod.POST)
+    public String addProductToWishList(@PathVariable String productId) {
+
+        String userId = SecurityUtil.obtainLoggedinUserIdentifier();
+        storeCommandService.addProductToWishList(userId, productId);
+
+        return "redirect:/product/" +productId;
+    }
 }

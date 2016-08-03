@@ -4,18 +4,16 @@ import org.axonframework.eventhandling.annotation.EventHandler;
 import org.axonframework.samples.trader.api.orders.LineItem;
 import org.axonframework.samples.trader.api.orders.OrderCompletedEvent;
 import org.axonframework.samples.trader.api.orders.OrderInfoDTO;
-import org.axonframework.samples.trader.api.users.LineItemAddedToCartEvent;
-import org.axonframework.samples.trader.api.users.LineItemQtyInCartUpdatedEvent;
-import org.axonframework.samples.trader.api.users.LineItemRemovedFromCartEvent;
+import org.axonframework.samples.trader.api.users.*;
 import org.axonframework.samples.trader.query.order.OrderEntry;
 import org.axonframework.samples.trader.query.order.OrderInfoDTOEntry;
 import org.axonframework.samples.trader.query.users.repositories.UserQueryRepository;
-import org.axonframework.samples.trader.api.users.UserCreatedEvent;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Set;
 
 @Component
 public class UserListener {
@@ -40,6 +38,10 @@ public class UserListener {
     public void handleLineItemAddedToCart(LineItemAddedToCartEvent event) {
         UserEntry userEntry = userRepository.findByIdentifier(event.getUserId().toString());
 
+        for(LineItemEntry lineItemEntry1: userEntry.getCart()) {
+            if(lineItemEntry1.getProductId().equals(event.getProductId().toString())) return;
+        }
+
         LineItemEntry lineItemEntry = new LineItemEntry();
         lineItemEntry.setProductId(event.getProductId().toString());
         lineItemEntry.setProductQuantity(event.getProductQuantity());
@@ -52,19 +54,13 @@ public class UserListener {
     public void handleLineItemRemovedFromCart(LineItemRemovedFromCartEvent event) {
         UserEntry userEntry = userRepository.findByIdentifier(event.getUserId().toString());
 
-        List<LineItemEntry> cart = userEntry.getCart();
-        int index = -1;
-
-        for(int i = 0; i<cart.size(); i++) {
-            LineItemEntry lineItemEntry = cart.get(i);
+        Set<LineItemEntry> cart = userEntry.getCart();
+        for(LineItemEntry lineItemEntry : cart) {
             if(lineItemEntry.getProductId().equals(event.getProductId().toString())) {
-                index = i;
+                cart.remove(lineItemEntry);
                 break;
             }
         }
-
-        if(index!=-1)
-            cart.remove(index);
 
         userRepository.save(userEntry);
     }
@@ -73,20 +69,28 @@ public class UserListener {
     public void handleLineItemQtyInCartUpdated(LineItemQtyInCartUpdatedEvent event) {
         UserEntry userEntry = userRepository.findByIdentifier(event.getUserId().toString());
 
-        List<LineItemEntry> cart = userEntry.getCart();
-        int index = -1;
-
-        for(int i = 0; i<cart.size(); i++) {
-            LineItemEntry lineItemEntry = cart.get(i);
+        Set<LineItemEntry> cart = userEntry.getCart();
+        for(LineItemEntry lineItemEntry : cart) {
             if(lineItemEntry.getProductId().equals(event.getProductId().toString())) {
-                index = i;
+                lineItemEntry.setProductQuantity(event.getProductQuantity());
                 break;
             }
         }
 
-        if(index!=-1)
-            cart.get(index).setProductQuantity(event.getProductQuantity());
+        userRepository.save(userEntry);
+    }
 
+    @EventHandler
+    public void handleProductAddedToWishList(ProductAddedToWishListEvent event) {
+        UserEntry userEntry = userRepository.findByIdentifier(event.getUserId().toString());
+        userEntry.getWishList().add(event.getProductId().toString());
+        userRepository.save(userEntry);
+    }
+
+    @EventHandler
+    public void handleProductRemovedFromWishList(ProductRemovedFromWishListEvent event) {
+        UserEntry userEntry = userRepository.findByIdentifier(event.getUserId().toString());
+        userEntry.getWishList().remove(event.getProductId().toString());
         userRepository.save(userEntry);
     }
 

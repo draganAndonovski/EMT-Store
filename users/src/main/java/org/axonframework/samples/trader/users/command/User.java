@@ -40,6 +40,14 @@ public class User extends AbstractAnnotatedAggregateRoot {
         apply(new LineItemQtyInCartUpdatedEvent(userId, productId, productQuantity));
     }
 
+    public void addProductToWishList(UserId userId, ProductId productId) {
+        apply(new ProductAddedToWishListEvent(userId, productId));
+    }
+
+    public void removeProductFromWishList(UserId userId, ProductId productId) {
+        apply(new ProductRemovedFromWishListEvent(userId, productId));
+    }
+
     @EventHandler
     public void onUserCreated(UserCreatedEvent event) {
         this.userId = event.getUserIdentifier();

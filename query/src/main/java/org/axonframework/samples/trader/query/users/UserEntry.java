@@ -9,7 +9,9 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Document
 public class
@@ -25,14 +27,15 @@ UserEntry implements UserAccount, Serializable {
     private String password;
 
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
-    private List<LineItemEntry> cart = new ArrayList<>();
+    private Set<LineItemEntry> cart = new HashSet<>();
+
+    @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
+    private Set<String> wishList = new HashSet<>();
 
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = OrderEntry.class)
     private List<OrderEntry> orders = new ArrayList<>();
 
-    public String getIdentifier() {
-        return identifier;
-    }
+    public String getIdentifier() { return identifier; }
 
     public void setIdentifier(String identifier) {
         this.identifier = identifier;
@@ -62,9 +65,13 @@ UserEntry implements UserAccount, Serializable {
         this.username = username;
     }
 
-    public List<LineItemEntry> getCart() { return cart; }
+    public Set<LineItemEntry> getCart() { return cart; }
 
-    public void setCart(List<LineItemEntry> cart) { this.cart = cart; }
+    public void setCart(Set<LineItemEntry> cart) { this.cart = cart; }
+
+    public Set<String> getWishList() { return wishList; }
+
+    public void setWishList(Set<String> wishList) { this.wishList = wishList; }
 
     public List<OrderEntry> getOrders() { return orders; }
 

@@ -53,6 +53,18 @@ public class UserCommandHandler {
         user.changeLineItemQtyInCart(command.getUserId(), command.getProductId(), command.getProductQuantity());
     }
 
+    @CommandHandler
+    public void handleAddProductToWishList(AddProductToWishListCommand command) {
+        User user = repository.load(command.getUserId());
+        user.addProductToWishList(command.getUserId(), command.getProductId());
+    }
+
+    @CommandHandler
+    public void handleRemoveProductFromWishList(RemoveProductFromWishListCommand command) {
+        User user = repository.load(command.getUserId());
+        user.removeProductFromWishList(command.getUserId(), command.getProductId());
+    }
+
 
     @Autowired
     @Qualifier("userRepository")
