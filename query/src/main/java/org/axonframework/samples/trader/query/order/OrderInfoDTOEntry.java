@@ -1,5 +1,8 @@
 package org.axonframework.samples.trader.query.order;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.axonframework.samples.trader.query.JsonViews;
+
 import javax.persistence.Embeddable;
 
 /**
@@ -8,16 +11,37 @@ import javax.persistence.Embeddable;
 @Embeddable
 public class OrderInfoDTOEntry {
 
+    @JsonView(JsonViews.Public.class)
     private String email;
+
+    @JsonView(JsonViews.Public.class)
     private String payerId;
+
+    @JsonView(JsonViews.Public.class)
     private String firstName;
+
+    @JsonView(JsonViews.Public.class)
     private String lastName;
+
+    @JsonView(JsonViews.Public.class)
     private String cntryCode;
+
+    @JsonView(JsonViews.Public.class)
     private String shipToName;
+
+    @JsonView(JsonViews.Public.class)
     private String shipToStreet;
+
+    @JsonView(JsonViews.Public.class)
     private String shipToCity;
+
+    @JsonView(JsonViews.Public.class)
     private String shipToState;
+
+    @JsonView(JsonViews.Public.class)
     private String shipToCntryCode;
+
+    @JsonView(JsonViews.Public.class)
     private String shipToZip;
 
     public String getEmail() { return email; }

@@ -1,5 +1,7 @@
 package org.axonframework.samples.trader.query.product;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.axonframework.samples.trader.query.JsonViews;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.index.TextIndexed;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -13,17 +15,27 @@ import javax.persistence.Lob;
 @Document
 public class ProductEntry {
 
+    @JsonView(JsonViews.Public.class)
     @Id
     private String identifier;
 
+    @JsonView(JsonViews.Public.class)
     @TextIndexed(weight = 5.0f)
     private String productName;
 
+    @JsonView(JsonViews.Public.class)
     private String productCategoryIdentifier;
+
+    @JsonView(JsonViews.Public.class)
     private float productPrice;
+
+    @JsonView(JsonViews.Public.class)
     private int availableQuantity;
+
+    @JsonView(JsonViews.Public.class)
     private boolean productAvailability;
 
+    @JsonView(JsonViews.Public.class)
     @TextIndexed(weight = 1.0f)
     private String productDescription;
 

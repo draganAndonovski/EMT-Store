@@ -1,5 +1,7 @@
 package org.axonframework.samples.trader.query.order;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.axonframework.samples.trader.query.JsonViews;
 import org.axonframework.samples.trader.query.users.LineItemEntry;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -10,24 +12,26 @@ import java.util.List;
 @Document
 public class OrderEntry {
 
+    @JsonView(JsonViews.Public.class)
     @Id
     private String identifier;
+
+    @JsonView(JsonViews.Public.class)
     private String userId;
 
     private String shippingAddress;
+
+    @JsonView(JsonViews.Public.class)
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
     private List<LineItemEntry> lineItemEntryList = new ArrayList<>();
 
+    @JsonView(JsonViews.Public.class)
     @Embedded
     private OrderInfoDTOEntry orderInfoDTOEntry;
 
-    public String getIdentifier() {
-        return identifier;
-    }
+    public String getIdentifier() { return identifier; }
 
-    void setIdentifier(String identifier) {
-        this.identifier = identifier;
-    }
+    void setIdentifier(String identifier) { this.identifier = identifier; }
 
     public String getShippingAddress() { return shippingAddress; }
 

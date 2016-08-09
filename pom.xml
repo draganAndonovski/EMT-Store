@@ -52,6 +52,7 @@
         <hibernate.javax.version>1.0.0.Final</hibernate.javax.version>
         <thymeleaf.version>2.1.4.RELEASE</thymeleaf.version>
         <quartz.scheduler.version>2.2.1</quartz.scheduler.version>
+        <jackson-databind.vesion>2.4.6</jackson-databind.vesion>
 
         <!-- Test libraries-->
         <junit.version>4.11</junit.version>

@@ -1,5 +1,7 @@
 package org.axonframework.samples.trader.query.category;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.axonframework.samples.trader.query.JsonViews;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
@@ -9,12 +11,17 @@ import org.springframework.data.mongodb.core.mapping.Document;
 @Document
 public class CategoryEntry {
 
+    @JsonView(JsonViews.Public.class)
     @Id
-    @javax.persistence.Id
     private String identifier;
 
+    @JsonView(JsonViews.Public.class)
     private String categoryName;
+
+    @JsonView(JsonViews.Public.class)
     private boolean mainCategory;
+
+    @JsonView(JsonViews.Public.class)
     private String parentCategory;
 
     public String getCategoryName() { return categoryName; }

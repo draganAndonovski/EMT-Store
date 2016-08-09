@@ -1,5 +1,7 @@
 package org.axonframework.samples.trader.query.users;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import org.axonframework.samples.trader.query.JsonViews;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.persistence.GeneratedValue;
@@ -16,7 +18,10 @@ public class LineItemEntry {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String identifier;
 
+    @JsonView(JsonViews.Public.class)
     private String productId;
+
+    @JsonView(JsonViews.Public.class)
     private int productQuantity;
 
     public String getProductId() { return productId; }

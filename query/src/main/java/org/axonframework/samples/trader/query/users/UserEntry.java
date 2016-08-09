@@ -1,7 +1,9 @@
 package org.axonframework.samples.trader.query.users;
 
+import com.fasterxml.jackson.annotation.JsonView;
 import org.axonframework.samples.trader.api.users.UserAccount;
 
+import org.axonframework.samples.trader.query.JsonViews;
 import org.axonframework.samples.trader.query.order.OrderEntry;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
@@ -17,21 +19,36 @@ import java.util.Set;
 public class
 UserEntry implements UserAccount, Serializable {
 
+    @JsonView(JsonViews.Public.class)
     @Id
     private String identifier;
+
+    @JsonView(JsonViews.Public.class)
     private String firstName;
+
+    @JsonView(JsonViews.Public.class)
     private String lastName;
+
+    @JsonView(JsonViews.Public.class)
     private String email;
+
+    @JsonView(JsonViews.Public.class)
     private String phone;
+
+    @JsonView(JsonViews.Public.class)
     private String username;
+
     private String password;
 
+    @JsonView(JsonViews.Public.class)
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
     private Set<LineItemEntry> cart = new HashSet<>();
 
+    @JsonView(JsonViews.Public.class)
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = LineItemEntry.class)
     private Set<String> wishList = new HashSet<>();
 
+    @JsonView(JsonViews.Public.class)
     @OneToMany(fetch = FetchType.EAGER, cascade =  CascadeType.ALL, targetEntity = OrderEntry.class)
     private List<OrderEntry> orders = new ArrayList<>();
 
@@ -57,13 +74,9 @@ UserEntry implements UserAccount, Serializable {
 
     public void setPhone(String phone) { this.phone = phone; }
 
-    public String getUsername() {
-        return username;
-    }
+    public String getUsername() { return username; }
 
-    public void setUsername(String username) {
-        this.username = username;
-    }
+    public void setUsername(String username) { this.username = username; }
 
     public Set<LineItemEntry> getCart() { return cart; }
 
