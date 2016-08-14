@@ -5,8 +5,10 @@ import org.axonframework.samples.trader.query.JsonViews;
 import org.axonframework.samples.trader.query.users.UserEntry;
 import org.axonframework.samples.trader.webui.services.StoreCommandService;
 import org.axonframework.samples.trader.webui.services.StoreService;
+import org.axonframework.samples.trader.webui.util.SecurityUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -17,6 +19,16 @@ public class UserRestController {
     StoreService storeService;
     @Autowired
     StoreCommandService storeCommandService;
+
+    @RequestMapping(method = RequestMethod.GET)
+    @JsonView(JsonViews.Public.class)
+    public UserEntry getAuthenticatedUserA() {
+        if(SecurityContextHolder.getContext().getAuthentication().getPrincipal().equals("anonymousUser")) {
+            return new UserEntry();
+        } else {
+            return storeService.findUser(SecurityUtil.obtainLoggedinUserIdentifier());
+        }
+    }
 
     @RequestMapping(value = "/{userId}", method = RequestMethod.GET)
     @JsonView(JsonViews.Public.class)
