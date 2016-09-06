@@ -45,8 +45,13 @@
         <intercept-url pattern="/category/addNewCategory" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/category" method="POST" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/category" method="GET" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/rest/category/**" method="GET" access="isAnonymous() or isAuthenticated()"/>
         <intercept-url pattern="/product/addNewProduct" access="hasRole('ROLE_ADMIN')"/>
         <intercept-url pattern="/rest/product" method="POST" access="hasRole('ROLE_ADMIN')"/>
+        <intercept-url pattern="/rest/product/**" method="GET" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/rest/**" method="OPTIONS" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/rest/search/**" method="GET" access="isAnonymous() or isAuthenticated()"/>
+        <intercept-url pattern="/product/**/picture" method="GET" access="isAnonymous() or isAuthenticated()"/>
         <intercept-url pattern="/**" access="hasRole('ROLE_USER') or hasRole('ROLE_ADMIN')"/>
         <form-login login-page="/login.jsp" authentication-failure-url="/login.html?login_error=1"/>
         <logout logout-success-url="/"/>

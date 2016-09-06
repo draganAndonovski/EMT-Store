@@ -34,4 +34,11 @@ public class WishListRestController {
         String userId = SecurityUtil.obtainLoggedinUserIdentifier();
         storeCommandService.removeProductFromWishList(userId, productId);
     }
+
+    @RequestMapping(value = "/{productId}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void addProductToWishList(@PathVariable("productId") String productId) {
+        String userId = SecurityUtil.obtainLoggedinUserIdentifier();
+        storeCommandService.addProductToWishList(userId,productId);
+    }
 }

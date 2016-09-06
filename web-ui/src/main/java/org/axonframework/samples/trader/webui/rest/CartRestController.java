@@ -49,4 +49,12 @@ public class CartRestController {
         String userId = SecurityUtil.obtainLoggedinUserIdentifier();
         storeCommandService.updateLineItemQuantity(userId, productId, quantity);
     }
+
+    @RequestMapping(value = "/{productId}", method = RequestMethod.POST)
+    @ResponseStatus(HttpStatus.ACCEPTED)
+    public void addProductToCart(@PathVariable("productId") String productId,
+                                 @RequestParam("quantity") int quantity) {
+        String userId = SecurityUtil.obtainLoggedinUserIdentifier();
+        storeCommandService.addLineItemToCart(userId,productId,quantity);
+    }
 }
